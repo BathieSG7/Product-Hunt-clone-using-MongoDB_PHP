@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}User Registration{% endblock title %}
+
+{% block content %}
+<br><br>
+<div class="container col-md-4">
+    <h4>Sign Up</h4>
+    <hr>
+    <pre class="bg-warning">{{ error_message }}</pre>
+    <form action="{% url 'account:signup' %}" method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" class="form-control" id="username" name="username" placeholder="Enter username" required>
+        </div>
+        <div class="form-group">
+            <label for="password1">Password</label>
+            <input type="password" class="form-control" name="password1" id="password1" placeholder="Password" required>
+        </div>
+        <div class="form-group">
+            <label for="password2">Confirm Password</label>
+            <input type="password" class="form-control" name="password2" id="password2" placeholder="Confirm Password"
+                required>
+        </div>
+        <button type="submit" class="btn btn-primary">Sign Up!</button>
+    </form>
+</div>
+<br><br><br><br>
+{% endblock content %}

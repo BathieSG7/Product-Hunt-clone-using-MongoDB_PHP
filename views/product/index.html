@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %}Home-Product Hunt{% endblock title %}
+
+
+{% block content %}
+<div class="container">
+    <br>
+    {% for product in products %}
+    <div class="row pt-5">
+        <div class="col-md-2">
+            <img src="{{ product.icon.url }}" class="img-fluid" />
+        </div>
+        <div class="col-md-7">
+            <a href="{% url 'product:detail' product.id %}">
+                <h2>{{ product.title }}</h2>
+            </a>
+            <p>{{ product.summary }}</p>
+        </div>
+        <div class="col-md-3">
+            <form action="{% url 'product:upvote' product.id %} " method="POST" id='upvote'>
+                {% csrf_token %}
+                <button class="btn btn-primary btn-lg btn-block"><i class="fa fa-caret-up">
+                    </i> Upvote {{ product.votes }} </button>
+                <input type="hidden" name='vote'>
+            </form>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+<div class="pb-5"></div>
+{% endblock content %}
