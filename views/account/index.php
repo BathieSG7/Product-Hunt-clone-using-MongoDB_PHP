@@ -1,7 +1,16 @@
-{% extends 'base.html' %}
-{% block title %}User-Home{% endblock title %}
+<?php 
+    $pageTitle="User-Home";
+    include('../../partials/header.php') ; 
+    # importing the mongodb class 
+    require_once('../../vendor/autoload.php');
+    require_once('../../config/MongoDB.php');
+    
+    $db= new MongoDB;
 
-{% block content %}
+    
+?> 
+
+
 <div class="container">
     <br>
     {% for product in products %}
@@ -27,4 +36,8 @@
     {% endfor %}
 </div>
 <div class="pb-5"></div>
-{% endblock content %}
+
+
+<?php 
+    include('../../partials/footer.php'); 
+?> 
