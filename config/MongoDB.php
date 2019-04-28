@@ -6,24 +6,9 @@
             $this->db=( new MongoDB\Client)->producthuntprojectdb;
         }
 
-        public function insertNewItem( $itemInfo = [])
-        {
-            if( empty( $itemInfo ) ){
-                return false;
-            }
-            // we have some data, so insert them all
-            $insertable = $this->db->insertOne([
-                'videoTitle' => $itemInfo['videoTitle'],
-                'videoLink'  => $itemInfo['videoLink'],
-                'videoID'  => $itemInfo['videoID'],
-                'videoArtist' => $itemInfo['videoArtist']
-            ]);
-            // return this inserted documents mongodb id
-            return $insertable->getInsertedId(); 
-        }
-        
+   
         public function getUser($username){ 
-            #This function returns a object(MongoDB\Model\BSONDocument)  which contains user information     
+            #This function returns the ID of the user if found     
             $result = $this->db->users->findOne(['username' => $username ]);
             if($result!=null){
                 return $result["_id"];
@@ -36,6 +21,7 @@
             $result = $this->db->users->insertOne(
                 ['username' => $username ,
                 'password' => $password_hash]);
+                
             return $result->getInsertedId();
         }
 

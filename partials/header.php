@@ -1,5 +1,9 @@
 <?php 
-session_start();
+    session_start();
+    # importing classes in the views
+    require_once('../../vendor/autoload.php');
+    require_once('../../config/MongoDB.php');
+
 ?> 
 
 <!doctype html>

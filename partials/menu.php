@@ -1,6 +1,3 @@
-<?php
-                           
- ?>  
 <!-- Navigation -->
 <body>
   <header>
@@ -26,7 +23,7 @@
                             My products</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url product:add_product %}"><i class="fas fa-plus"></i>
+                        <a class="nav-link" href="/views/product/add.view.php"><i class="fas fa-plus"></i>
                             add product</a>
                     </li>
 

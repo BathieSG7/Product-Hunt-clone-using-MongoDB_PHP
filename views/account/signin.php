@@ -1,13 +1,10 @@
 <?php 
     $pageTitle="User Login";
     include('../../partials/header.php') ; 
-    # importing the mongodb class 
-    require_once('../../vendor/autoload.php');
-    require_once('../../config/MongoDB.php');
     
     $db= new MongoDB;
 
-    # SIGNING UP
+    # SIGNING In
     if(isset($_POST['signin'])){
         #extracting user informations
         extract($_POST);

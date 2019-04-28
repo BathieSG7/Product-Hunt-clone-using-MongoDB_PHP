@@ -1,9 +1,6 @@
 <?php 
     $pageTitle="User Registration";
     include('../../partials/header.php') ; 
-    # importing the mongodb class 
-    require_once('../../vendor/autoload.php');
-    require_once('../../config/MongoDB.php');
     
     $db= new MongoDB;
 
@@ -13,7 +10,9 @@
         if(isset($password1)){
             $userDB = $db->getUser($username);
             if($password1==$password2 && isset($userDB)==FALSE ){
-                $db->addUser($_POST);
+                #saving user's ID
+                $_SESSION['userID']= $db->addUser($_POST);
+                # saving the user's state
                 $_SESSION['authentificated']=TRUE;
                 header('location: index.php');
             }else{

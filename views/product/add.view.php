@@ -1,8 +1,9 @@
-{% extends 'base.html' %}
+<?php 
+    $pageTitle="Add product";
+    include('../../partials/header.php') ; 
+?> 
 
-{% block title %}Add product{% endblock title %}
 
-{% block content %}
 <br><br>
 <div class="container">
     <div class="row">
@@ -10,8 +11,7 @@
             <h4>Add Product</h4>
             <hr>
             <pre class="bg-warning">{{ error_message }}</pre>
-            <form action="{% url 'product:add_product' %}" method="POST" enctype="multipart/form-data">
-                {% csrf_token %}
+            <form action="upload.php" method="POST" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="title">Title</label>
                     <input type="text" class="form-control" name="title" placeholder="Enter title" required>
@@ -33,10 +33,13 @@
                     <label for="icon">Product image</label>
                     <input type="file" class="form-control-file" id="image" name="image">
                 </div>
-                <button type="submit" class="btn btn-primary">Upload</button>
+                <button type="submit" class="btn btn-primary" name="Upload" >Upload</button>
             </form>
         </div>
     </div>
 </div>
 <br><br><br><br>
-{% endblock content %}
+
+<?php 
+    include('../../partials/footer.php'); 
+?> 
