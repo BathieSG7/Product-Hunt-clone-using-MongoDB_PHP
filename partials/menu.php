@@ -15,7 +15,7 @@
                         if (isset($_SESSION['authentificated']) && $_SESSION['authentificated']==TRUE){
                 ?>        
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url product:index %}"><i class="fas fa-home"></i>
+                        <a class="nav-link" href="/index.php"><i class="fas fa-home"></i>
                             Homepage</a>
                     </li>
                     <li class="nav-item">

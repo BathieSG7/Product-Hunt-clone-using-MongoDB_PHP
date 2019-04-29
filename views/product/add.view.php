@@ -10,8 +10,28 @@
         <div class="col-md-6">
             <h4>Add Product</h4>
             <hr>
-            <pre class="bg-warning">{{ error_message }}</pre>
-            <form action="upload.php" method="POST" enctype="multipart/form-data">
+            <?php 
+                // ERROR CHECK
+                if(isset($_SESSION['errorMessage']['UploadError']) ){
+                    echo '
+                        <div class="alert alert-warning alert-dismissible" role="alert">
+                            <button type="button" class="close" data-dismiss="alert">
+                            <span>&times;</span>
+                                </button>
+                            <strong>Warning:</strong>'.$_SESSION['errorMessage']['UploadError'].' 
+                        </div>';
+                }
+                if(isset($_SESSION['errorMessage']['allFieldSet']) ){
+                    echo '
+                        <div class="alert alert-warning alert-dismissible" role="alert">
+                            <button type="button" class="close" data-dismiss="alert">
+                            <span>&times;</span>
+                                </button>
+                            <strong>Warning:</strong>'.$_SESSION['errorMessage']['allFieldSet'].' 
+                        </div>';
+                }
+            ?> 
+            <form action="add.php" method="POST" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="title">Title</label>
                     <input type="text" class="form-control" name="title" placeholder="Enter title" required>

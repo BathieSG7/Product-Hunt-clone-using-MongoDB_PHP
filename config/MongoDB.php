@@ -15,6 +15,15 @@
             }
         }
 
+        public function getUserByID($userID){ 
+            #This function returns the ID of the user if found     
+            $result = $this->db->users->findOne(['_id' => $userID]);
+           
+            if($result!=null){
+                return $result;
+            }
+        }
+
         public function addUser($usercredentials){
             extract($usercredentials);
             $password_hash = password_hash($password1,PASSWORD_BCRYPT);

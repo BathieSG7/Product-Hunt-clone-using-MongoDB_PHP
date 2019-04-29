@@ -1,9 +1,10 @@
 <?php 
     session_start();
-    # importing classes in the views
-    require_once('../../vendor/autoload.php');
-    require_once('../../config/MongoDB.php');
-
+    # importing basic classes in the views
+    if( strcmp($_SERVER['SCRIPT_NAME'],'/index.php') ){ 
+      require_once('../../vendor/autoload.php');
+      require_once('../../config/MongoDB.php');     
+    }
 ?> 
 
 <!doctype html>

@@ -9,23 +9,15 @@
         }
 
 
-        private function UserVoteStatus () {
-            #testing if the user already voted for a specific product
-            $result = $this->collection->findOne(
-                ['userID' => $_SESSION['userID'] ,
-                 'ProductID' => $this->ProductID
-                ]
-            );
-            if(isset($result))
-                return true;
-            else
-                return false;           
-        }
-
         public function upvote(){          
             # if POST isset -- A REVOIR
-           
-            if(UserVoteStatus) {
+            #testing if the user already voted for a specific product
+            $result = $this->collection->findOne(
+            ['userID' => $_SESSION['userID'] ,
+                'ProductID' => $this->ProductID
+            ] );
+            
+            if(isset($result)) {
                 return false;
             }else{
                 # Taking the current  value of votes correponding to the product
@@ -42,7 +34,7 @@
                 # UPGRADING voter collection
                 $InsertionResult = $this->collection->insertOne(
                     ['userID' => $_SESSION['userID'],
-                     'ProductID' => $ProductID,
+                     'ProductID' =>   $this->ProductID,
                     ]);
 
                 return true;
