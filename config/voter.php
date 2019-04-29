@@ -4,7 +4,13 @@
         function __construct($ProductID)
         {
             $this->collection=( new MongoDB\Client)->producthuntprojectdb->voter;
-            $this->ProductID=$ProductID;
+            # Check if the product id's class is correct 
+            if (get_class($this->ProductID)!="MongoDB\BSON\ObjectId" ){
+                $this->ProductID =  new MongoDB\BSON\ObjectId($ProductID);
+            }else{
+                $this->ProductID=$ProductID;
+            }
+           
             $this->db=( new MongoDB\Client)->producthuntprojectdb;;
         }
 
@@ -12,11 +18,12 @@
         public function upvote(){          
             # if POST isset -- A REVOIR
             #testing if the user already voted for a specific product
+
             $result = $this->collection->findOne(
             ['userID' => $_SESSION['userID'] ,
-                'ProductID' => $this->ProductID
+             'ProductID' => $this->ProductID
             ] );
-            
+           
             if(isset($result)) {
                 return false;
             }else{
@@ -41,6 +48,14 @@
             }
         }
 
+        public function DropUserVote(){
+            $deleteResult = $this->collection->deleteOne(['ProductID' =>  $this->ProductID ]);
+            
+            if (isset($deleteResult))
+                return true;
+            else
+                return false;
+        }
+
     }
-?>
 

@@ -7,22 +7,27 @@
     require_once('../../config/voter.php');
     require_once('../../config/Products.php');
     
-
+    // GETTING the id from /index.php page
     if(isset($_GET['id'])){
-        $product = (new Products())->GetProduct($_GET['id']); 
-         
-        # Getting the username      
-        $userGot = (new MongoDB )->getUserByID($product['user']);
-        $userName = $userGot['username'];
+        # SAving the product ID before unsetting it
+        $ProductID = $_GET['id'];
+        unset($_GET['id']);
     }
 
     // Vote management
     if(isset($_POST['vote'])){
-        $voter=new voter($_SESSION['ProductID']);
+        # SAving the product ID before unsetting it
+        $ProductID = $_SESSION['ProductID'];
         unset($_SESSION['ProductID']);
+     
         #VOte effectif
-        $result=$voter->upvote();
+        $resultVote = (new voter($ProductID))->upvote();
     }
+
+    $product = (new Products())->GetProduct( $ProductID );       
+    # Getting the username      
+    $userGot = (new MongoDB )->getUserByID($product['user']);
+    $userName = $userGot['username'];
 
 ?> 
 
@@ -46,9 +51,14 @@
 
         <div class="col-4">
             <form action=<?php /*The htmlentities() function encodes the HTML entities.Now if the user tries to exploit the PHP_SELF variable, the attempt will fail*/ 
-                        echo  htmlentities($_SERVER['PHP_SELF']);
-                        $_SESSION['ProductID']=$product['_id']
-                            ?> 
+                        #if the user is logged in
+                        if (isset($_SESSION['authentificated']) && $_SESSION['authentificated']==TRUE){
+                            echo  htmlentities($_SERVER['PHP_SELF']);
+                            $_SESSION['ProductID']=$product['_id'];
+                        }else{
+                            echo '/views/account/signup.php';
+                        }                       
+                         ?> 
             method="POST" id='upvote'>
                 <button class="btn btn-primary btn-lg btn-block"><i class="fa fa-caret-up">
                     </i> Upvote  <?php echo $product['votes'] ?> </button>

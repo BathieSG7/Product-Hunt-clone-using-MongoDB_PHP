@@ -1,5 +1,6 @@
 <?php 
     $pageTitle = "Home-Product Hunt";
+    $HomePageActive="";
     include('./partials/header.php') ;
     # importing the mongodb class 
     require_once('./vendor/autoload.php');
@@ -21,8 +22,8 @@
     <br>
 
 <?php 
-$ProductCollection = new Products();
-$Products = $ProductCollection->GetAllProducts();
+
+$Products = (new Products())->GetAllProducts();
 foreach($Products as $product ){
 ?> 
     <div class="row pt-5">
@@ -33,7 +34,7 @@ foreach($Products as $product ){
             <a href=<?php echo '/views/product/detail.view.php?id='.$product['_id'] ?>>
                 <h2> <?php echo $product['title'] ?> </h2>
             </a>
-            <p><?php echo substr($product['body'],0, 100) ?></p>
+            <p><?php echo substr($product['body'],0, 275) ?></p>
         </div>
         <div class="col-md-3">
             <form action=<?php /*The htmlentities() function encodes the HTML entities.Now if the user tries to exploit the PHP_SELF variable, the attempt will fail*/ 

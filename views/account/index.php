@@ -1,43 +1,20 @@
 <?php 
-    $pageTitle="User-Home";
+    session_start();
     include('../../partials/header.php') ; 
     # importing the mongodb class 
     require_once('../../vendor/autoload.php');
     require_once('../../config/MongoDB.php');
-    
-    $db= new MongoDB;
+    require_once('../../config/Products.php');
+    require_once('../../config/voter.php');
 
-    
-?> 
+    # Here we drop all Product dependencies 
+    $Products = (new Products())->DropUserProducts($_GET['id']);
+    $vote = (new voter($_GET['id']))->DropUserVote();
+    if($Products && $vote )
+        $_SESSION['successMessage']['dropStatus'] = " You've Successfully delete your Product ";
+       # echo "You'd Successfully delete your Product ";
+    else
+        $_SESSION['errorMessage']['dropStatus'] = " An error occured while deleting your Product ";
+     # echo  "An error occured while deleting your Product ";
 
-
-<div class="container">
-    <br>
-    {% for product in products %}
-    <div class="row pt-5">
-        <div class="col-md-2">
-            <img src="{{ product.icon.url }}" class="img-fluid" />
-        </div>
-        <div class="col-md-6">
-            <a href="{% url 'product:detail' product.id %}">
-                <h2>{{ product.title }}</h2>
-            </a>
-            <p>{{ product.summary }}</p>
-        </div>
-        <div class="col-md-2">
-            <button class="btn btn-info btn-lg btn-block" disabled=><i class="fa fa-info-circle"></i> Votes:
-                {{product.votes}}</button>
-        </div>
-        <div class="col-md-2">
-            <a href="{% url 'account:delete_product' product.id %}"><button class="btn btn-danger btn-lg btn-block"><i
-                        class="fa fa-trash-alt"></i> Delete</button></a>
-        </div>
-    </div>
-    {% endfor %}
-</div>
-<div class="pb-5"></div>
-
-
-<?php 
-    include('../../partials/footer.php'); 
-?> 
+    header('location:index.view.php');

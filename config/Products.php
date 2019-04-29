@@ -60,13 +60,45 @@
 
         public function GetAllProducts(){
             #getting the products
-            return  $this->collection->find(); 
+            return  $this->collection->find(
+                [],
+                [
+                    'limit' => 5,
+                    'sort' => ['votes' => -1],
+                ]
+            ); 
         }
+
         public function GetProduct($ProductID){
-            #getting the product
-            
+            #getting the product           
             $result = $this->collection->findOne(['_id' =>  new MongoDB\BSON\ObjectId($ProductID) ]);
             return  $result; 
+        }
+
+        public function GetUserProducts($userID){
+            # TEST IF THE USERID'S CLASS IS MongoDB\BSON\ObjectId
+            if (get_class($userID)!="MongoDB\BSON\ObjectId" ){
+                $NewUserID =  new MongoDB\BSON\ObjectId($ProductID);
+            }else{
+                $NewUserID = $userID;
+            }
+            $result = $this->collection->find(
+                ['user' =>  $NewUserID ],            
+                [
+                    'limit' => 5,
+                    'sort' => ['votes' => -1],
+                ]
+            );
+            return  $result; 
+        }
+
+        public function DropUserProducts($ProductID){
+            $deleteResult = $this->collection->deleteOne(['_id' =>  new MongoDB\BSON\ObjectId($ProductID) ]);
+            
+            if (isset($deleteResult))
+                return true;
+            else
+                return false;
         }
     }
 ?>

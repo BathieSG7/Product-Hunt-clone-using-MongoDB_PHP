@@ -1,5 +1,6 @@
 <?php 
     $pageTitle="User Login";
+    $LoginActive="";
     include('../../partials/header.php') ; 
     
     $db= new MongoDB;
@@ -9,13 +10,13 @@
         #extracting user informations
         extract($_POST);
         # getting the user id
-        $userDB = $db->getUser($username);
+        $userID = $db->getUser($username);
         # saving the user's id in the SESSION variable
-        $_SESSION['userID']= $userDB ;
+        $_SESSION['userID']= $userID ;
         # Checking if the password is correct and the user exist
-        if($db->passwordMatch($password) && isset($userDB) ){                
+        if($db->passwordMatch($password) && isset($userID) ){                
             $_SESSION['authentificated']=TRUE;
-            header('location: index.php');
+            header('location: index.view.php');
         }else{
             $_SESSION['authentificated']=FALSE;
         }

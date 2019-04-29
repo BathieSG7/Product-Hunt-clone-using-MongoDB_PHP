@@ -1,5 +1,6 @@
 <?php 
     $pageTitle="Add product";
+    $AddProductActive="";
     include('../../partials/header.php') ; 
 ?> 
 
@@ -20,6 +21,8 @@
                                 </button>
                             <strong>Warning:</strong>'.$_SESSION['errorMessage']['UploadError'].' 
                         </div>';
+                    
+                    unset($_SESSION['errorMessage']['UploadError']);
                 }
                 if(isset($_SESSION['errorMessage']['allFieldSet']) ){
                     echo '
@@ -29,6 +32,7 @@
                                 </button>
                             <strong>Warning:</strong>'.$_SESSION['errorMessage']['allFieldSet'].' 
                         </div>';
+                    unset($_SESSION['errorMessage']['UploadError']);
                 }
             ?> 
             <form action="add.php" method="POST" enctype="multipart/form-data">

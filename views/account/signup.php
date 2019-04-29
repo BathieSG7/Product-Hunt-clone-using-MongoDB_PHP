@@ -1,5 +1,6 @@
 <?php 
     $pageTitle="User Registration";
+    $SignUpActive="";
     include('../../partials/header.php') ; 
     
     $db= new MongoDB;
@@ -14,7 +15,7 @@
                 $_SESSION['userID']= $db->addUser($_POST);
                 # saving the user's state
                 $_SESSION['authentificated']=TRUE;
-                header('location: index.php');
+                header('location: index.view.php');
             }else{
                 $_SESSION['authentificated']=FALSE;
             }

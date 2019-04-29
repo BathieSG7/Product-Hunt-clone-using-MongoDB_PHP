@@ -22,7 +22,10 @@
         $uploadOk = 1;
         $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
         
+        var_dump( $imageFileType );
+        echo '<br>';
         // Check if image file is a actual image or fake image
+        var_dump($_FILES[$fileToUpload]);
         $check = getimagesize($_FILES[$fileToUpload]["tmp_name"]);
         if($check !== false) {
             echo "File is an image - " . $check["mime"] . ".";
@@ -45,8 +48,8 @@
         }
         */
         // Allow certain file formats
-        if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-        && $imageFileType != "gif" ) {
+        if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" 
+        && $imageFileType != "gif" && $imageFileType != "svg" ) {
             echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
             $uploadOk = 0;
         }
