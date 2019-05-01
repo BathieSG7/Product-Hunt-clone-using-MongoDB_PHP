@@ -34,7 +34,7 @@ foreach($Products as $product ){
             <a href=<?php echo '/views/product/detail.view.php?id='.$product['_id'] ?>>
                 <h2> <?php echo $product['title'] ?> </h2>
             </a>
-            <p><?php echo substr($product['body'],0, 275) ?></p>
+            <p><?php echo substr($product['body'],0, 150) ?></p>
         </div>
         <div class="col-md-3">
             <form action=<?php /*The htmlentities() function encodes the HTML entities.Now if the user tries to exploit the PHP_SELF variable, the attempt will fail*/ 

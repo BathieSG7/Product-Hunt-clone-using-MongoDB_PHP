@@ -52,7 +52,7 @@ foreach($Products as $product ){
             <a href="<?php echo '/views/product/detail.view.php?id='.$product['_id'] ?>">
                 <h2><?php echo $product['title'] ?></h2>
             </a>
-            <p><?php echo substr($product['body'],0, 275) ?></p>
+            <p><?php echo substr($product['body'],0, 150) ?></p>
         </div>
         <div class="col-md-2">
             <button class="btn btn-info btn-lg btn-block" disabled=><i class="fa fa-info-circle"></i> Votes:

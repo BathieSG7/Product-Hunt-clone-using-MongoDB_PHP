@@ -52,8 +52,8 @@
                 </div>';
         }
     ?>  
-    <form action="signup.php" method="POST">
-  
+    <form action="<?php echo  htmlentities($_SERVER['PHP_SELF']); ?> " method="POST">
+    
         <div class="form-group">
             <label for="username">Username</label>
             <input type="text" class="form-control" id="username" name="username" placeholder="Enter username" required>
