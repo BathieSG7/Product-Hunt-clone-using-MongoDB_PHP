@@ -27,7 +27,7 @@ This project require the installation of :
 <h2>Author</h2>
 <blockquote>
   Samba SOUGOU<br>
-  Email: sougousamba@gmail.com
+  Email: sougousambaofficel@gmail.com
 </blockquote>
 
 
